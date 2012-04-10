@@ -28,6 +28,12 @@ try
       module._compile content, filename
 catch err
 
+try
+  hogan = require 'hogan.js'
+  compilers.mustache = (modules, filename) ->
+    content = hogan.compile(fs.readFileSync(filename, 'utf8'), asString: true)
+    module._compile "module.exports = #{content}", filename
+catch err
 
 exports.Package = class Package
   constructor: (config) ->
