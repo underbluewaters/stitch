@@ -32,7 +32,7 @@ try
   hogan = require 'hogan.js'
   compilers.mustache = (module, filename) ->
     content = hogan.compile(fs.readFileSync(filename, 'utf8'), asString: true)
-    module._compile "module.exports = #{content}", filename
+    module._compile "module.exports = new Hogan.Template(#{content});", filename
 catch err
 
 exports.Package = class Package
